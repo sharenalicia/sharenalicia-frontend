@@ -5,6 +5,7 @@ import Contact from '@/components/Contact'
 import Friends from '@/components/Friends'
 import Login from "../components/Login";
 import Divisi from "../components/Divisi";
+import DivisiPesanan from "../components/DivisiPesanan";
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       path: "/divisi",
       name: 'Divisi',
       component: Divisi
+    },
+    {
+      path: "/divisi/:id/:nama",
+      name: 'DivisiPesanan',
+      component: DivisiPesanan
     },
     {
       path: '/friends/:id/:age/:weight',

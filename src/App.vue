@@ -1,16 +1,64 @@
 <template>
   <div id="app">
-    <router-link to="friends/1/2/3">Friends</router-link>
-    <router-link to="account">Account</router-link>
-    <router-link to="contact">Contact</router-link>
+    <div v-if="isLogin">
+
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">APP</a>
+
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link :to="{ name: 'Divisi'}" class="nav-link">Pilih Divisi</router-link>
+          </li>
+
+          <!-- Dropdown -->
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Halo Namamu
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <br>
+    </div>
+<!--    <img src="./assets/logo.png">-->
+<!--    <router-link to="friends/1/2/3">Friends</router-link>-->
+<!--    <router-link to="account">Account</router-link>-->
+<!--    <router-link to="contact">Contact</router-link>-->
     <router-view/>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+    import axios from 'axios';
+    export default {
+        name: 'app',
+        data() {
+            return {
+                isLogin: false
+            }
+        },
+        created() {
+            if (localStorage.getItem('token')) {
+                this.isLogin = true;
+            }
+        },
+        mounted() {
+            if (localStorage.getItem('token')) {
+                this.isLogin = true;
+            }
+        },
+        methods() {
+
+        }
+    }
 </script>
 
 <style>

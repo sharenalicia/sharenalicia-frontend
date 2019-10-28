@@ -72,7 +72,8 @@ export default {
           console.log(res.data.data.apitoken);
           localStorage.setItem('token', res.data.data.apitoken);
 
-          this.$router.replace(this.$route.query.redirect || '/about')
+          this.$router.push('Divisi');
+          // this.$router.replace(this.$route.query.redirect || '/about')
         },
         loginFailed(res){
           this.message = res.data.message;
