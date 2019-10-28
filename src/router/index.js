@@ -6,6 +6,7 @@ import Friends from '@/components/Friends'
 import Login from "../components/Login";
 import Divisi from "../components/Divisi";
 import DivisiPesanan from "../components/DivisiPesanan";
+import Logout from "../components/Logout";
 
 Vue.use(Router)
 
@@ -17,6 +18,10 @@ export default new Router({
       component: Login
     },
     {
+      path: '/Home',
+      redirect: '/'
+    },
+    {
       path: "/divisi",
       name: 'Divisi',
       component: Divisi
@@ -25,6 +30,10 @@ export default new Router({
       path: "/divisi/:id/:nama",
       name: 'DivisiPesanan',
       component: DivisiPesanan
+    },{
+      path: "/logout",
+      name: 'Logout',
+      component: Logout
     },
     {
       path: '/friends/:id/:age/:weight',

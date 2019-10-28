@@ -21,7 +21,7 @@
               Halo Namamu
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Logout</a>
+              <router-link :to="{ name: 'Logout'}" class="dropdown-item">Logout</router-link>
             </div>
           </li>
         </ul>
@@ -66,7 +66,7 @@
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   color: #2c3e50;
   margin-top: 60px;
 }

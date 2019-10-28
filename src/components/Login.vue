@@ -45,10 +45,8 @@ export default {
       if (localStorage.getItem('token')) {
           this.$router.push('Divisi')
       }
-        // console.log('ini created');
     },
     mounted() {
-        // console.log('ini mounted');
     },
     methods: {
       submitLogin: function (event) {

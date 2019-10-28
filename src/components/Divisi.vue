@@ -1,6 +1,12 @@
 <template>
   <div>
     <div class="container">
+
+      <div class="jumbotron">
+        <h1>Pilih Divisi</h1>
+        <p>Silakan pilih divisi anda.</p>
+      </div>
+
       <div class="form-group">
         <label for="divisi">Pilih Divisi:</label>
         <select v-model="selected" @change="pilih" class="form-control" id="divisi">
@@ -25,6 +31,11 @@
                     { text: 'minuman', value: '2' },
                     { text: 'snack', value: '3' }
                 ]
+            }
+        },
+        created() {
+            if (!localStorage.getItem('token')) {
+                this.$router.push('Home')
             }
         },
         methods: {

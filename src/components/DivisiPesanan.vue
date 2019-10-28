@@ -6,39 +6,61 @@
         <h1>Divisi {{ divisiNama }}</h1>
         <p>Daftar pesanan menurut divisi {{ divisiNama }}.</p>
       </div>
+    </div>
+    <div class="container">
 
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>#</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Age</th>
-            <th>City</th>
-            <th>Country</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>1</td>
-            <td>Anna</td>
-            <td>Pitt</td>
-            <td>35</td>
-            <td>New York</td>
-            <td>USA</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Anna</td>
-            <td>Pitt</td>
-            <td>35</td>
-            <td>New York</td>
-            <td>USA</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+      <ul class="list-group">
+        <li v-for="(item, index) in pesanan" class="list-group-item">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8 float-left">
+              <table class="table table-borderless">
+                <tr>
+                  <td colspan="2">
+                    <h3>{{ item.nama }}</h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>ID Menu: {{ item.id_menu}}</td>
+                  <td>ID Meja: {{ item.id_meja}}</td>
+                </tr>
+                <tr>
+                  <td>ID Pesanan: {{ item.id_pesanan}}</td>
+                  <td>Jumlah: {{ item.jumlah }}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="float-left">
+                    Total Bayar: {{ item.total }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+<!--      <div class="table-responsive">-->
+<!--        <table class="table">-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th>#</th>-->
+<!--            <th>Firstname</th>-->
+<!--            <th>Lastname</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr v-for="item as pesanan">-->
+<!--            <td>{{ item.id_menu }}</td>-->
+<!--            <td>{{ item.nama }}</td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>1</td>-->
+<!--            <td>Anna</td>-->
+<!--            <td>Pitt</td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </div>-->
 
     </div>
   </div>
@@ -50,7 +72,7 @@
         name: "DivisiPesanan",
         data () {
             return {
-                url: 'http://localhost:8000',
+                url: 'http://localhost:8012',
                 divisiId: this.$route.params.id,
                 divisiNama: this.$route.params.nama,
                 pesanan: []
@@ -60,31 +82,34 @@
             if (!localStorage.getItem('token')) {
                 this.$router.push('Home')
             }
-            console.log(this.divisiId);
-            console.log(this.divisiNama);
         },
         mounted() {
             let token = localStorage.getItem('token');
             this.getData(this.divisiNama, token);
-            console.log(this.item);
         },
         methods: {
             getData: function (type, token) {
                 let url = '';
 
                 if (type === 'makanan') {
-                    url = this.url + '/makanan/' + token;
+                    url = this.url + '/api/makanan/' + token;
                 }else if (type === 'minuman') {
-                    url = this.url + '/minuman/' + token;
+                    url = this.url + '/api/minuman/' + token;
                 } else if (type === 'snack') {
-                    url = this.url + '/snack/' + token;
+                    url = this.url + '/api/snack/' + token;
                 }
 
-                console.log(url);
                 axios.get(url)
                     .then(response => {
-                        this.item = response.data;
+                        this.pesanan = response.data;
                     });
+                console.log(url);
+                // setInterval(function () {
+                //     axios.get(url)
+                //         .then(response => {
+                //             this.pesanan = response.data;
+                //         });
+                // }, 200000)
             }
         }
     }
