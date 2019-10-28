@@ -8,7 +8,9 @@
       </div>
     </div>
     <div class="container">
-
+      <p>
+        <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="cetak">CETAK</button>
+      </p>
       <ul class="list-group">
         <li v-for="(item, index) in pesanan" class="list-group-item">
           <div class="row">
@@ -38,30 +40,6 @@
           </div>
         </li>
       </ul>
-
-<!--      <div class="table-responsive">-->
-<!--        <table class="table">-->
-<!--          <thead>-->
-<!--          <tr>-->
-<!--            <th>#</th>-->
-<!--            <th>Firstname</th>-->
-<!--            <th>Lastname</th>-->
-<!--          </tr>-->
-<!--          </thead>-->
-<!--          <tbody>-->
-<!--          <tr v-for="item as pesanan">-->
-<!--            <td>{{ item.id_menu }}</td>-->
-<!--            <td>{{ item.nama }}</td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td>1</td>-->
-<!--            <td>Anna</td>-->
-<!--            <td>Pitt</td>-->
-<!--          </tr>-->
-<!--          </tbody>-->
-<!--        </table>-->
-<!--      </div>-->
-
     </div>
   </div>
 </template>
@@ -72,7 +50,7 @@
         name: "DivisiPesanan",
         data () {
             return {
-                url: 'http://localhost:8012',
+                url: 'http://localhost:8000',
                 divisiId: this.$route.params.id,
                 divisiNama: this.$route.params.nama,
                 pesanan: []
@@ -104,12 +82,9 @@
                         this.pesanan = response.data;
                     });
                 console.log(url);
-                // setInterval(function () {
-                //     axios.get(url)
-                //         .then(response => {
-                //             this.pesanan = response.data;
-                //         });
-                // }, 200000)
+            },
+            cetak: function () {
+                window.print();
             }
         }
     }

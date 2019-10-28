@@ -4,7 +4,7 @@
 
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">APP</a>
+        <a class="navbar-brand" href="#">APLIKASI</a>
 
         <!-- Links -->
         <ul class="navbar-nav">
