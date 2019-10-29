@@ -1,10 +1,15 @@
 <template>
   <div>
     <div class="container">
-
+      <div v-if="invalidToken">
+        <div class="alert alert-danger" role="alert">
+          Token Invalid.
+        </div>
+      </div>
       <div class="jumbotron">
         <h1>Divisi {{ divisiNama }}</h1>
         <p>Daftar pesanan menurut divisi {{ divisiNama }}.</p>
+        <!-- <p>Data di reload dalam {{ countDown }} detik</p> -->
       </div>
     </div>
     <div class="container">
@@ -53,17 +58,36 @@
                 url: 'http://localhost:8000',
                 divisiId: this.$route.params.id,
                 divisiNama: this.$route.params.nama,
-                pesanan: []
+                pesanan: [],
+                countDown: 15,
+                invalidToken: ''
             }
         },
         created() {
             if (!localStorage.getItem('token')) {
                 this.$router.push('Home')
             }
+            this.$router.push({path: this.$route.path, query: {token: localStorage.getItem('token')}})
+            let token = this.$route.query.token;
+
+            if (token !== localStorage.getItem('token')) {
+              this.invalidToken = true;
+            }
         },
         mounted() {
             let token = localStorage.getItem('token');
             this.getData(this.divisiNama, token);
+            
+            window.setInterval(() => {
+              if(this.countDown <= 0) {
+                this.countDown = 15;
+                
+                let token = localStorage.getItem('token');
+                this.getData(this.divisiNama, token);
+              }else{
+                this.countDown = this.countDown - 1;
+              }
+          },1000);
         },
         methods: {
             getData: function (type, token) {

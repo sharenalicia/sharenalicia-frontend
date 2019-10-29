@@ -70,7 +70,8 @@ export default {
           console.log(res.data.data.apitoken);
           localStorage.setItem('token', res.data.data.apitoken);
 
-          this.$router.push('Divisi');
+          // this.$router.push('Divisi');
+          this.$router.go('Divisi');
           // this.$router.replace(this.$route.query.redirect || '/about')
         },
         loginFailed(res){

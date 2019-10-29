@@ -37,6 +37,7 @@
             if (!localStorage.getItem('token')) {
                 this.$router.push('Home')
             }
+            this.$router.push({path: this.$route.path, query: {token: localStorage.getItem('token')}})
         },
         methods: {
             pilih: function ({ type, target }) {
